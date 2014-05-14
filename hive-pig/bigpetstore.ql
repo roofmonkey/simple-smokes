@@ -1,3 +1,5 @@
+drop table bps_cleaned; 
+
 create external table bps_cleaned (
 
 store string,
