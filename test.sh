@@ -52,7 +52,8 @@ sleep 2
 echo "Now testing `wc -l /mnt/glusterfs/tmp/flume-test/`"
 cat /mnt/glusterfs/tmp/flume-test/* | grep -q "hello"
 echo "Flume Result = $?" 
-rm nohup.out
+### just cat the results also,  for debugging
+   cat /mnt/glusterfs/tmp/flume-test/* | grep hello 
 
 ### Test SQOOP
 export SQOOP_HOME=/usr/lib/sqoop
