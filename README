@@ -1,0 +1,30 @@
+This is a simple smoke test tool for hadoop, gluster.
+
+The final output is the results, to std.out. 
+
+The single script, test.sh, controls everything.  
+
+This is meant to be MINIMAL and easy to run. 
+
+For comprehensive tests of the whole ecosystem , you can run the BIGTOP 
+testing framework, specifically, BIGTOP-1222 aims to make bigtop accessible
+to a broader audience.
+
+You can parse the results out of stdout in an automated build/release system: 
+
+  PIG_RESULT = 0 Wed May 14 06:34:26 MST 2014 
+  HIVE RESULT = 0 Wed May 14 06:35:01 MST 2014 
+  FLUME Result = 0 Wed May 14 06:36:03 MST 2014 
+  ...
+
+And determine to release iff all test results = 0.
+
+For more advanced , comprehensive smokes, BIGTOP-1222 is on the way.  But for now, this is maintainable and easy to run/set up on any cluster.
+
+DIRECTIONS
+
+1) git clone this repo.
+2) cd to this repo.
+3) update JAVA_HOME, and run test.sh.
+
+Thats it ! There are some hard coded environment variables, but they should be stable for HDP at least.

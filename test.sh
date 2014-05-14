@@ -43,13 +43,14 @@ echo "Timeout for flume agent expired... now testing sink."
 sleep 2
 echo "Now testing `wc -l /mnt/glusterfs/tmp/flume-test/`"
 cat /mnt/glusterfs/tmp/flume-test/* | grep -q "hello"
-echo "Flume Result = $?"
+echo "Flume Result = $?" 
 rm nohup.out
 
 ### Test SQOOP
 export SQOOP_HOME=/usr/lib/sqoop
 cd sqoop
 ./test-sqoop.sh
-echo "SQOOP RESULT = $? `date` " >> RESULTS
+echo "SQOOP RESULT = $?"
 cd ..
 
+echo "TESTS DONE !"
