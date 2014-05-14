@@ -14,24 +14,30 @@ echo "MAPRED RESULT = $?"
 ### Test Mahout 
 cp mahout/als_input /mnt/glusterfs/user/tom/
 rm -rf /mnt/glusterfs/user/tom/als_output
+rm -rf /mnt/glusterfs/tmp/mahout* 
 
-mahout parallelALS --input als_input --lambda 0.1 --implicitFeedback true --alpha 0.8 --numFeatures 2 --numIterations 5  --numThreadsPerSolver 1 --tempDir /tmp-als --output als_output
+mahout parallelALS --input als_input --lambda 0.1 --implicitFeedback true --alpha 0.8 --numFeatures 2 --numIterations 5  --numThreadsPerSolver 1 --tempDir /tmp/mahout-als --output als_output
 
 echo "MAHOUT RESULT = $?" 
 
 ### Test Pig + Advanced Mapreduce (BigPetStore)
-/usr/lib/hadoop/bin/hadoop jar bigpetstore-1.3.10.jar org.bigtop.bigpetstore.generator.BPSGenerator 1000 bigpetstore
+/usr/lib/hadoop/bin/hadoop jar hive-pig/bigpetstore-1.3.10.jar org.bigtop.bigpetstore.generator.BPSGenerator 1000 bigpetstore
 
 cp /usr/lib/pig/pig-0.12.0.2.0.6.1-101-withouthadoop.jar /mnt/glusterfs/pig.jar
 export HADOOP_CLASSPATH=/usr/lib/pig/pig-0.12.0.2.0.6.1-101-withouthadoop.jar 
 
-/usr/lib/hadoop/bin/hadoop jar bigpetstore/bigpetstore-1.3.10.jar org.bigtop.bigpetstore.etl.PigCSVCleaner -libjars glusterfs:///pig.jar bigpetstore bigpetstore_cleaned 
+/usr/lib/hadoop/bin/hadoop jar hive-pig/bigpetstore-1.3.10.jar org.bigtop.bigpetstore.etl.PigCSVCleaner -libjars glusterfs:///pig.jar bigpetstore bigpetstore_cleaned 
+bps=$?
+echo "PIG RESULT = $bps"
+echo "BPS RESULT = $bps" 
 
 ### Now test hive on the bigpetstore data
 
 export HIVE_HOME=/usr/lib/hive/
 ### If fails... then Make sure hive server is started ???
 hive -f hive-pig/bigpetstore.ql
+
+echo "HIVE RESULT = $?"
 
 ### Test Flume
 
