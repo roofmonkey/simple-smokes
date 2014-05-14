@@ -46,4 +46,10 @@ cat /mnt/glusterfs/tmp/flume-test/* | grep -q "hello"
 echo "Flume Result = $?"
 rm nohup.out
 
+### Test SQOOP
+export SQOOP_HOME=/usr/lib/sqoop
+cd sqoop
+./test-sqoop.sh
+echo "SQOOP RESULT = $? `date` " >> RESULTS
+cd ..
 
