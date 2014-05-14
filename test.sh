@@ -21,6 +21,8 @@ mahout parallelALS --input als_input --lambda 0.1 --implicitFeedback true --alph
 echo "MAHOUT RESULT = $?" 
 
 ### Test Pig + Advanced Mapreduce (BigPetStore)
+rm -rf /mnt/glusterfs/user/tom/bigpet*
+
 /usr/lib/hadoop/bin/hadoop jar hive-pig/bigpetstore-1.3.10.jar org.bigtop.bigpetstore.generator.BPSGenerator 1000 bigpetstore
 
 cp /usr/lib/pig/pig-0.12.0.2.0.6.1-101-withouthadoop.jar /mnt/glusterfs/pig.jar
