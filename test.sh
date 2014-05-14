@@ -1,3 +1,5 @@
+mv RESULTS RESULTS_OLD
+
 ### This script has only one dependency... bigpetstore ! To get it got to github.com/apache/bigtop and 
 ### build with "mvn clean package".  
 
