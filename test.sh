@@ -17,7 +17,9 @@ rm -rf /mnt/glusterfs/user/tom/als_output
 rm -rf /mnt/glusterfs/tmp/mahout* 
 
 mahout parallelALS --input als_input --lambda 0.1 --implicitFeedback true --alpha 0.8 --numFeatures 2 --numIterations 5  --numThreadsPerSolver 1 --tempDir /tmp/mahout-als --output als_output
-
+### Just confirming that the first als task has a part-r* output.  
+### After we update the plugin, remove this.
+ls -altrh /mnt/glusterfs/user/tom/als_output/*
 echo "MAHOUT RESULT = $?" 
 
 ### Test Pig + Advanced Mapreduce (BigPetStore)
