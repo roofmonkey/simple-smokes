@@ -8,6 +8,9 @@
 hadoop fs -rmr T
 hadoop fs -rm -r /tmp/sqsmoke*
 
+#This is in the dfs - thus - this 
+#database is actually distributed to all nodes.
+#no need for an actual url.
 dbfile="/mnt/glusterfs/tmp/sqsmoke"
 
 # Create a simple table...
@@ -30,7 +33,10 @@ password" > $HOME/sqltool.rc
 
 echo "creating table....."
 
-# SQL Statements to execute.
+# Create a Database in the DFS .  HSQL will forward jdbc requests to 
+# read from a "local" file that is actually identical on all nodes -
+# thus simulating a real sqoop workflow where mappers can pull data
+# from a jdbc interface in parallel. 
 echo "CREATE TABLE t (i INT PRIMARY KEY, v VARCHAR(25), d DATE);
 INSERT INTO t(i, v, d) VALUES (1, 'one two three', null);
 INSERT INTO t(i, v, d) VALUES (2, null, '2007-06-24');
