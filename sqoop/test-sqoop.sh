@@ -16,7 +16,7 @@ dbfile="/mnt/glusterfs/tmp/sqsmoke"
 # Create a simple table...
 #sqltool=`find sqltool*jar`
 #echo "sql tool is $sqltool "
-hsql=`find $SQOOP_HOME/lib -name hsql*jar`
+hsql=`find $SQOOP_HOME/lib -name hsql*jar | grep -v sources`
 echo "hsql : $hsql"
 
 rm -rf $dbfile
